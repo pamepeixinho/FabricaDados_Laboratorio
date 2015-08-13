@@ -46,7 +46,6 @@ public class Dado extends AtomicReference{
         
         this.cod_dado+= (int) Math.floor(Math.random()*10000);
         
-        System.out.println("COD_DADO = " + cod_dado);
         
         this.cor = cor;
         this.tipo = tipo;
