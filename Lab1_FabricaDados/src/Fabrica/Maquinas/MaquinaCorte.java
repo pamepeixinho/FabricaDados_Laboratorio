@@ -13,7 +13,7 @@ public class MaquinaCorte extends AbstractMaquina{
     }
     
     @Override //annotation
-    public Dado Processa(Dado d) {
+    public void Processa(Dado d) {
         if(!d.isCortado()){
             try{
                  Thread.sleep(20);
@@ -21,7 +21,7 @@ public class MaquinaCorte extends AbstractMaquina{
              catch(InterruptedException e){}       
             Corta(d);
         }
-        return d;
+//        return d;
     }
     
 }

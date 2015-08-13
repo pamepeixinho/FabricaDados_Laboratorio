@@ -11,6 +11,7 @@ public abstract class AbstractMaquina {
     public boolean isLigado() {
         return this.ligado;
     }
+    
     public void Liga() {
         this.ligado = true;
     }
@@ -22,5 +23,5 @@ public abstract class AbstractMaquina {
     }
     
     //polimorfismo - abstract - (Processa) o dado fazendo a devida ação
-    public abstract Dado Processa(Dado d);
+    public abstract void Processa(Dado d);
 }

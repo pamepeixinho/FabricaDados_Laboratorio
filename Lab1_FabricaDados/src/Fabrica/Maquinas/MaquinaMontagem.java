@@ -14,7 +14,7 @@ public class MaquinaMontagem extends AbstractMaquina{
     }
     
     @Override //annotation
-    public Dado Processa(Dado d) {
+    public void Processa(Dado d) {
         if(!d.isMontado()){
             try{
                Thread.sleep(45);
@@ -22,6 +22,6 @@ public class MaquinaMontagem extends AbstractMaquina{
            catch(InterruptedException e){}   
             Monta(d);
         }
-        return d;           
+//        return d;           
     }
 }

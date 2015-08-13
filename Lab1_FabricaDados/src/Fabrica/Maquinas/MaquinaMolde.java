@@ -13,7 +13,7 @@ public class MaquinaMolde extends AbstractMaquina{
     }
     
     @Override //annotation 
-    public Dado Processa(Dado d) {
+    public void Processa(Dado d) {
        if(!d.isMoldado()){
            if(d.getTipo() == 2){
              try{
@@ -29,7 +29,7 @@ public class MaquinaMolde extends AbstractMaquina{
            }
            Molda(d);
         }
-       return d;
+//       return d;
     }
     
     

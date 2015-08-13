@@ -13,7 +13,7 @@ public class MaquinaPintura extends AbstractMaquina{
     }
             
     @Override //annotation
-    public Dado Processa(Dado d) {
+    public void Processa(Dado d) {
         if(!d.isPintado()){
             if(d.getCor() == 'v'){
                              try{
@@ -35,7 +35,7 @@ public class MaquinaPintura extends AbstractMaquina{
             }
             Pinta(d);
         }
-        return d;
+//        return d
     }
     
     
