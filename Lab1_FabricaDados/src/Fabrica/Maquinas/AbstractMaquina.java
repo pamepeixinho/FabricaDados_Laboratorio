@@ -22,5 +22,5 @@ public abstract class AbstractMaquina {
     }
     
     //polimorfismo - abstract - (Processa) o dado fazendo a devida ação
-    public abstract void Processa(Dado d);
+    public abstract Dado Processa(Dado d);
 }

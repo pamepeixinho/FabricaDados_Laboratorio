@@ -1,29 +1,11 @@
 package Fabrica.Produto;
 
+//import java.util.concurrent.atomic.AtomicInteger;;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class Dado extends AtomicReference{
 
-    public Dado(String cod_dado, char cor, int tipo, Object initialValue) {
-        super(initialValue);
-        this.cod_dado = cod_dado;
-        this.cor = cor;
-        this.tipo = tipo;
-    }
 
-    public Dado() {
-    }
-    
-    public Dado(String cod_dado, char cor, int tipo) {
-        this.cod_dado = cod_dado;
-        this.cor = cor;
-        this.tipo = tipo;
-        this.cortado = false;
-        this.moldado = false;
-        this.montado = false;
-        this.pintado = false;
-    }
-      
     //Dados Feature
     private String cod_dado;
     private char cor;
@@ -34,6 +16,45 @@ public class Dado extends AtomicReference{
     private boolean cortado;
     private boolean montado; //montado -> dobrado
     private boolean pintado;
+
+    
+    public Dado(String cod_dado, char cor, int tipo, Object initialValue) {
+        super(initialValue);
+        this.cod_dado = cod_dado;
+        this.cor = cor;
+        this.tipo = tipo;
+    }
+    public Dado() {
+    }
+    public Dado(String cod_dado, char cor, int tipo) {
+        this.cod_dado = cod_dado;
+        this.cor = cor;
+        this.tipo = tipo;
+        this.cortado = false;
+        this.moldado = false;
+        this.montado = false;
+        this.pintado = false;
+    }
+     
+    public Dado(int tipo, char cor) {
+
+        this.cod_dado = "Dado" + cor;
+        if (tipo == 1)
+            this.cod_dado+="P";
+        else 
+            this.cod_dado+="G";
+        
+        this.cod_dado+= Math.random()*10000;
+        
+        System.out.println("COD_DADO = " + cod_dado);
+        
+        this.cor = cor;
+        this.tipo = tipo;
+        this.cortado = false;
+        this.moldado = false;
+        this.montado = false;
+        this.pintado = false;
+    }
 
     public String getCod_dado() {
         return cod_dado;
@@ -62,9 +83,6 @@ public class Dado extends AtomicReference{
     public void setMoldado(boolean moldado) {
         this.moldado = moldado;
     }
-    public void Molda(){
-        this.moldado = true;
-    }
 
     public boolean isCortado() {
         return cortado;
@@ -72,18 +90,13 @@ public class Dado extends AtomicReference{
     public void setCortado(boolean cortado) {
         this.cortado = cortado;
     }
-    public void Corta(){
-        this.cortado = true;
-    }
+
     
     public boolean isMontado() {
         return montado;
     }
     public void setMontado(boolean montado) {
         this.montado = montado;
-    }
-    public void Monta(){
-        this.montado = true;
     }
     
     public boolean isPintado() {
@@ -92,8 +105,6 @@ public class Dado extends AtomicReference{
     public void setPintado(boolean pintado) {
         this.pintado = pintado;
     }
-    public void Pinta(){
-        this.pintado = true;
-    }
+
     
 }
