@@ -28,6 +28,7 @@ public class MaquinaMolde extends AbstractMaquina{
                catch(InterruptedException e){}   
            }
            Molda(d);
+           
         }
 //       return d;
     }

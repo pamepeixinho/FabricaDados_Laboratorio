@@ -1,7 +1,7 @@
 package Fabrica.Produto;
 
 import Fabrica.Maquinas.*;
-import java.io.IOException;
+import java.io.*;
 //import java.time.Clock;
 import java.util.*;
 
@@ -10,15 +10,15 @@ public class DadosMaker {
     
     public static void Processando_Dados() throws IOException{
         
-        Scanner input = new Scanner(System.in);
+        //Scanner input = new Scanner(System.in);
+        int pedidos;
+        int num_dados = 0; 
+        int tipo = 0;
+        char cor = 0;
         
-        int num_dados = input.nextInt();
-        int tipo = input.nextInt();
-        char cor = input.next().charAt(0);
-        
-        System.out.println("n = " + num_dados);
-        System.out.println("tipo = " + tipo);
-        System.out.println("cor = " + cor);
+        //System.out.println("n = " + num_dados);
+        //System.out.println("tipo = " + tipo);
+        //System.out.println("cor = " + cor);
         
         Dado []  manufacturedDices = new Dado[num_dados];
         
@@ -59,25 +59,44 @@ public class DadosMaker {
         long stopTime = System.currentTimeMillis();
         
         System.out.println("DONE " + (stopTime - startTime) + " ms.");
-//        System.out.println("isMoldado? " + d.isMoldado());
-//        moldador.Processa(d);
-//        System.out.println("isMoldado? " + d.isMoldado());
-//
-//        System.out.println("isPintado? " + d.isPintado());
-//        pintor.Processa(d);
-//        System.out.println("isPintado? " + d.isPintado());
-//        
-//        System.out.println("isCortado? " + d.isCortado());
-//        cortador.Processa(d);
-//        System.out.println("isCortado? " + d.isCortado());
-//        
-//        System.out.println("isMontado? " + d.isMontado());
-//        montador.Processa(d);
-//        System.out.println("isMontado? " + d.isMontado());
+
+    }
+    
+    /**
+     *
+     * @param dir
+     * @throws FileNotFoundException
+     */
+    public static void le_pedido(String dir) throws FileNotFoundException{
+        
+        FileInputStream file = new FileInputStream(dir);
+        
+        Scanner s = new Scanner(file);
+        int n_pedidos = s.nextInt();
+        
+        Vector <Order> pedidos = new Vector(n_pedidos);
+        
+        for (int i = 0; i < n_pedidos; i++){
+            
+            Order pd;
+            System.out.println(s.nextInt());
+            System.out.println(s.next().charAt(0));
+            System.out.println(s.next());
+            //pd = new Order(s.nextInt(), s.next().charAt(0), s.nextInt());
+            
+            //pedidos.setElementAt(pd, i);
+            
+        }
+        
         
     }
     
     public static void main(String[] args) throws IOException {
-        Processando_Dados();
+        
+        // /Users/Victorroveda/Google Drive/4 Semestre/Lab Guigs/pedidos.txt
+        
+        le_pedido("/Users/Victorroveda/Google Drive/4 Semestre/Lab Guigs/pedidos.txt");
+        //Processando_Dados();
     }
+    
 }
