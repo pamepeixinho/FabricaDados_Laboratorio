@@ -1,11 +1,16 @@
 package Fabrica.Produto;
 
+import Fabrica.Pedidos.Leitor;
 import Fabrica.Maquinas.*;
 import java.io.*;
 //import java.time.Clock;
 import java.util.*;
 
 public class DadosMaker {
+
+    public DadosMaker() throws IOException {
+        Processando_Dados();
+    }
 //    private Clock clock;
     
     public static void Processando_Dados() throws IOException{
@@ -61,41 +66,17 @@ public class DadosMaker {
         System.out.println("DONE " + (stopTime - startTime) + " ms.");
 
     }
+
     
-    /**
-     *
-     * @param dir
-     * @throws FileNotFoundException
-     */
-    public static void le_pedido(String dir) throws FileNotFoundException{
-        
-        FileInputStream file = new FileInputStream(dir);
-        
-        Scanner s = new Scanner(file);
-        int n_pedidos = s.nextInt();
-        
-        Vector <Order> pedidos = new Vector(n_pedidos);
-        
-        for (int i = 0; i < n_pedidos; i++){
-            
-            Order pd;
-            System.out.println(s.nextInt());
-            System.out.println(s.next().charAt(0));
-            System.out.println(s.next());
-            //pd = new Order(s.nextInt(), s.next().charAt(0), s.nextInt());
-            
-            //pedidos.setElementAt(pd, i);
-            
-        }
         
         
-    }
+    
     
     public static void main(String[] args) throws IOException {
         
         // /Users/Victorroveda/Google Drive/4 Semestre/Lab Guigs/pedidos.txt
-        
-        le_pedido("/Users/Victorroveda/Google Drive/4 Semestre/Lab Guigs/pedidos.txt");
+        Leitor l = new Leitor("C:\\Users\\unifakhatib\\LAB\\FabricaDados_Laboratorio\\Lab1_FabricaDados\\Pedidos\\pedidos.txt");
+        //le_pedido("/Users/Victorroveda/Google Drive/4 Semestre/Lab Guigs/pedidos.txt");
         //Processando_Dados();
     }
     

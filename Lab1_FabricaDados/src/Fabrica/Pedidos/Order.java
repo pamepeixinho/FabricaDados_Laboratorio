@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Fabrica.Produto;
+package Fabrica.Pedidos;
 
 /**
  *
@@ -11,9 +11,9 @@ package Fabrica.Produto;
  */
 public class Order {
     
-    int numDados;
-    int tipo;
-    char cor;
+   private int numDados;
+   private int tipo;
+   private char cor;
 
     public Order(int tipo, char cor, int numDados) {
         this.numDados = numDados;
