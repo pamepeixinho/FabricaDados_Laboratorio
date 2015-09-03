@@ -44,9 +44,9 @@ public class DadosMaker {
                 System.out.print("COLOR: " + inProcess.getCor() + "\n\n");
 
                 moldador.Processa(inProcess);
-                pintor.Processa(inProcess);
-                cortador.Processa(inProcess);
-                montador.Processa(inProcess);
+//                pintor.Processa(inProcess);
+//                cortador.Processa(inProcess);
+//                montador.Processa(inProcess);
                     
                 saida.add(inProcess);
                 

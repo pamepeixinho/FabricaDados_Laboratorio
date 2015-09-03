@@ -3,7 +3,7 @@ package Fabrica.Maquinas;
 
 import Fabrica.Produto.Dado;
 
-public class MaquinaMontagem extends AbstractMaquina{
+public class MaquinaMontagem extends AbstractMaquina implements Runnable{
 
     public MaquinaMontagem() {
         Liga();
@@ -23,5 +23,10 @@ public class MaquinaMontagem extends AbstractMaquina{
             Monta(d);
         }
 //        return d;           
+    }
+
+    @Override
+    public void run() {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

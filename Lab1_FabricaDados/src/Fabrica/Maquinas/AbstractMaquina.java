@@ -2,7 +2,7 @@ package Fabrica.Maquinas;
 
 import Fabrica.Produto.Dado;
 
-public abstract class AbstractMaquina {
+public abstract class AbstractMaquina{
     public boolean ligado = false;
 
     public AbstractMaquina() {
