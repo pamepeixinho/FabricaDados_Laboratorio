@@ -2,6 +2,7 @@ package Fabrica.Pedidos;
 
 import Fabrica.Produto.DadosMaker;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,6 +16,7 @@ public class OrderManager {
    
     public OrderManager(Leitor l) {
         this.l = l;
+        makeDados();
     }
    
     public OrderManager(){}
@@ -26,14 +28,13 @@ public class OrderManager {
            //Logger.getLogger(OrderManager.class.getName()).log(Level.SEVERE, null, ex);
            System.out.println("File not found");
        }
+       
+        makeDados();
     }
     
     public void makeDados(){
-        pedidos = l.le_pedido();
-        
-//        DadosMaker make = new DadosMaker();
-        //PARAMOS AQUI
-        
-       
+        System.out.println("asmkl");
+        this.pedidos = l.le_pedido();
+        DadosMaker producao = new DadosMaker(pedidos);
     }
 }

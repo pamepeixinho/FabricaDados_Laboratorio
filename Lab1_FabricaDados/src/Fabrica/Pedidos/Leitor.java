@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Fabrica.Pedidos;
 import ExceptionPackage.EmptyFile;
 
@@ -45,7 +40,6 @@ public class Leitor {
         
          System.out.println(n_pedidos);
         
-//         Vector <Order> pedidos = new Vector(n_pedidos);
          Order [] pedidos = new Order[n_pedidos];
                   
         int tipo = 0, quantidade = 0;
@@ -57,7 +51,6 @@ public class Leitor {
                 tipo = s.nextInt();
                 cor = s.next().charAt(0);
                 quantidade = s.nextInt(); 
-//                System.out.println("MAROON 5");
             }catch(Exception e){
                 System.out.println("fudeu muito");
                 return null;
