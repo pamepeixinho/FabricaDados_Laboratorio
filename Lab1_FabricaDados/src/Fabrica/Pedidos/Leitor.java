@@ -3,13 +3,14 @@ import ExceptionPackage.EmptyFile;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
+import java.util.InputMismatchException;
+//import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Vector;
-import jdk.nashorn.internal.parser.TokenType;
+//import java.util.Vector;
+//import jdk.nashorn.internal.parser.TokenType;
 
 public class Leitor {
-    private static String path;
+    private String path;
     public Leitor(String path) throws FileNotFoundException {
         this.path = path;
 //        le_pedido();
@@ -32,10 +33,19 @@ public class Leitor {
            
         Scanner s = new Scanner(file);
         int n_pedidos = 0;
+        
         try{
             n_pedidos = s.nextInt();
-        }catch(Exception e){
-            System.out.println("FUDEU");
+        }catch(InputMismatchException e){
+//            System.out.println("FUDEU");
+            System.out.println("A entrada não corresponde ao pedido");
+            System.out.println("Entre novamente");
+            return null;
+        }
+        catch(Exception e){
+            System.out.println("A entrada não corresponde ao pedido");
+            System.out.println("Entre novamente");
+            return null;
         }
         
          System.out.println(n_pedidos);

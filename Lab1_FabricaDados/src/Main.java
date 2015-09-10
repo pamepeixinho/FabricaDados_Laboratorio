@@ -10,7 +10,9 @@ public class Main {
 //        Leitor l = new Leitor("C:\\Users\\unifakhatib\\LAB\\FabricaDados_Laboratorio\\Lab1_FabricaDados\\Pedidos\\pedidos.txt");
         //le_pedido("/Users/Victorroveda/Google Drive/4 Semestre/Lab Guigs/pedidos.txt");
         //Processando_Dados();
-        OrderManager produz = new OrderManager("C:\\Users\\unifakhatib\\LAB\\FabricaDados_Laboratorio\\Lab1_FabricaDados\\Pedidos\\teste.txt");
+        
+        OrderManager produz = new OrderManager("Pedidos/teste.txt");
+        
        
     }
     
