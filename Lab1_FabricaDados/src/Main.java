@@ -11,8 +11,7 @@ public class Main {
         //le_pedido("/Users/Victorroveda/Google Drive/4 Semestre/Lab Guigs/pedidos.txt");
         //Processando_Dados();
         
-        OrderManager produz = new OrderManager("Pedidos/teste.txt");
-        
+        OrderManager produz = new OrderManager("Pedidos/pedidos.txt");
        
     }
     

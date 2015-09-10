@@ -61,8 +61,17 @@ public class Leitor {
                 tipo = s.nextInt();
                 cor = s.next().charAt(0);
                 quantidade = s.nextInt(); 
-            }catch(Exception e){
+            }
+            catch(InputMismatchException e){
+                System.out.println("FUDEU");
+                System.out.println("A entrada não corresponde ao pedido");
+                System.out.println("Entre novamente");
+                return null;
+            }
+            catch(Exception e){
                 System.out.println("fudeu muito");
+                System.out.println("A entrada não corresponde ao pedido");
+                System.out.println("Entre novamente");
                 return null;
             }
             
