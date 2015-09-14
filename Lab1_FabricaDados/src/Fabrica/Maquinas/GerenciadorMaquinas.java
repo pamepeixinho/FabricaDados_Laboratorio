@@ -1,88 +1,176 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Fabrica.Maquinas;
 
 import Fabrica.Pedidos.*;
 import Fabrica.Produto.Dado;
-//import java.util.logging.Level;
-//import java.util.logging.Logger;
-/**
- *
- * @author unifakhatib
- */
-public class GerenciadorMaquinas {
-    private MaquinaCorte mCorte;
-    private MaquinaMolde mMolde;
-    private MaquinaMontagem mMontagem;
-    private MaquinaPintura mPintura;
-    private Esteira e1;
-    private Esteira e2;
-    private Esteira e3;
-    private Esteira e4;
-    private Esteira e5;
-    
+import java.util.ArrayList;
+import java.util.concurrent.ArrayBlockingQueue;
 
-    public GerenciadorMaquinas() {
-        this.teste();
+
+public class GerenciadorMaquinas {
+    //Maquinas Threads
+    private final Thread [] mMolde; 
+    private final Thread [] mPintura;
+    private final Thread [] mCorte;
+    private final Thread [] mMontagem;
+    
+    //Object - ArrayBlockingList
+    private final Esteira [] esteira;
+    
+    //Pedido
+    private Order pedido;
+    
+    
+    public GerenciadorMaquinas(int qM1, int qM2, int qM3, int qM4) {
+        this.mMolde = new Thread[qM1];
+        this.mPintura = new Thread[qM2];
+        this.mCorte = new Thread[qM3];
+        this.mMontagem = new Thread[qM4];
+        this.esteira = new Esteira[qM1 + qM2 + qM3 + qM4 + 1];
     }
-    public GerenciadorMaquinas(Order pedido){
+    
+    public GerenciadorMaquinas(Order pedido, int qM1, int qM2, int qM3, int qM4){
+        this.pedido = pedido;
+        this.mMolde = new Thread[qM1];
+        this.mPintura = new Thread[qM2];
+        this.mCorte = new Thread[qM3];
+        this.mMontagem = new Thread[qM4];
+        this.esteira = new Esteira[qM1 + qM2 + qM3 + qM4 + 1];
+    }
+        
+    @SuppressWarnings("empty-statement")
+    public ArrayList<Dado> execute(){
+        int k = 0, numDados = pedido.getNumDados();
+        
+        ArrayBlockingQueue<Dado> d= new ArrayBlockingQueue<>(pedido.getNumDados());
+        
+        for(int i = 0; i < numDados; i++)
+            d.add(new Dado(pedido.getTipo(),pedido.getCor()));
+                
+        for(int i = 0; i < esteira.length; i++ )
+            esteira[i] = new Esteira(numDados);
+
+        for(int i = 0; i < mMolde.length; i++){
+            mMolde[i] = new Thread(new MaquinaMolde(esteira[k],esteira[k+1],("M" + (k+1) + " - Molde")));
+            k++;
+            mMolde[i].start();
+        }
+        
+        for(int i = 0; i < mPintura.length; i++){
+            mPintura[i] = new Thread(new MaquinaPintura(esteira[k],esteira[k+1],("M" + (k+1) + " - Pintura")));    
+            k++;
+            mPintura[i].start();
+        }
+        
+        for(int i = 0; i < mCorte.length; i++){
+            mCorte[i] = new Thread(new MaquinaCorte(esteira[k],esteira[k+1],("M" + (k+1) + " - Corte")));
+            k++;
+            mCorte[i].start();
+        }
+        
+        for(int i = 0; i < mMontagem.length; i++){
+            mMontagem[i] = new Thread(new MaquinaMontagem(esteira[k],esteira[k+1],("M" + (k+1) + " - Montagem")));    
+            k++;
+            mMontagem[i].start();
+        }
+
+        esteira[0].addAll(d);
+        
+        while(esteira[esteira.length - 1].size() < numDados)
+            ;
+        
+//        System.out.println("Terminaram os Dados");
+               
+        for (Thread mMolde1 : mMolde) 
+            mMolde1.interrupt();
+              
+        for (Thread mPintura1 : mPintura)
+            mPintura1.interrupt();
+        
+        for (Thread mCorte1 : mCorte)
+            mCorte1.interrupt();
+       
+        for (Thread mMontagem1 : mMontagem)
+            mMontagem1.interrupt();
+        
+        
+        ArrayList<Dado> d1 = new ArrayList<>(esteira[esteira.length-1]);        
+        return d1;
+        
     }
     
     public final void teste(){
-        int n = 2;
-        e1 = new Esteira(10);
-        e2 = new Esteira(10);
-        e3 = new Esteira(10);
-        e4 = new Esteira(10);
-        e5 = new Esteira(10);
+        int n = 2, k = 0;
+        for(int i = 0; i < esteira.length; i++ )
+            esteira[i] = new Esteira(n);
+
+       
+        for(int i = 0; i < mMolde.length; i++){
+            mMolde[i] = new Thread(new MaquinaMolde(esteira[k],esteira[k+1],("M" + (k+1) + " - Molde")));
+            k++;
+            mMolde[i].start();
+         
+        }
         
-        mMolde = new MaquinaMolde(e1,e2,"M1");
-        mPintura = new MaquinaPintura(e2,e3,"M2");
-        mCorte = new MaquinaCorte(e3,e4,"M3");
-        mMontagem = new MaquinaMontagem(e4,e5,"M4");
-             
-        Thread m3 = new Thread(mCorte);
-        Thread m1 = new Thread(mMolde);
-        Thread m4 = new Thread(mMontagem);
-        Thread m2 = new Thread(mPintura);
+        for(int i = 0; i < mPintura.length; i++){
+            mPintura[i] = new Thread(new MaquinaPintura(esteira[k],esteira[k+1],("M" + (k+1) + " - Pintura")));    
+            k++;
+            mPintura[i].start();
+            
+        }
         
-        m1.start();
-        m2.start();
-        m3.start();
-        m4.start();
+        for(int i = 0; i < mCorte.length; i++){
+            mCorte[i] = new Thread(new MaquinaCorte(esteira[k],esteira[k+1],("M" + (k+1) + " - Corte")));
+            k++;
+            mCorte[i].start();
+            
+        }
+        
+        for(int i = 0; i < mMontagem.length; i++){
+            mMontagem[i] = new Thread(new MaquinaMontagem(esteira[k],esteira[k+1],("M" + (k+1) + " - Montagem")));    
+            k++;
+            mMontagem[i].start();
+        }
+
         
         for(int i = 0; i < n; i++)
-            e1.add(new Dado(1,'p'));
+            esteira[0].add(new Dado(1,'p'));
         
-        while(e5.size() < n){
+        while(esteira[esteira.length - 1].size() < n){
         }
+        
         System.out.println("Terminaram os Dados");
+               
+        for (Thread mMolde1 : mMolde) {
+            mMolde1.interrupt();
+        }
+             
+        for (Thread mPintura1 : mPintura) {
+            mPintura1.interrupt();
+        }
         
-        mCorte.Desliga();
-        mPintura.Desliga();
-        mMolde.Desliga();
-        mMontagem.Desliga();
-
-//        e1.wakeUpAll();
-//        e2.wakeUpAll();
-//        e3.wakeUpAll();
-//        e4.wakeUpAll();
-//        e5.wakeUpAll();
-        
-        m1.interrupt();
-        m2.interrupt();
-        m3.interrupt();
-        m4.interrupt();
+        for (Thread mCorte1 : mCorte) {
+            mCorte1.interrupt();
+        }
+            
+        for (Thread mMontagem1 : mMontagem) {
+            mMontagem1.interrupt();
+        }
 
     }
     
-    public static void main(String [] args){
-       GerenciadorMaquinas gm = new GerenciadorMaquinas();
-       
+    public Order getPedido() {
+        return pedido;
     }
-    
+
+    public void setPedido(Order pedido) {
+        this.pedido = pedido;
+    }
+
+//    public static void main(String [] args){
+////       GerenciadorMaquinas gm = new GerenciadorMaquinas(1,2,1,1);
+////       gm.teste();
+//    }
+//    
    
 }

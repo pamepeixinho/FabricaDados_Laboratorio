@@ -47,12 +47,12 @@ public class MaquinaPintura extends AbstractMaquina implements Runnable{
     public void run() {
         Dado d;
         while(this.isLigado()){
-            System.out.println("Vou retirar " + this.name);
+//            System.out.println("Vou retirar " + this.name);
             try{
                 d = input.receive();
             }
             catch(InterruptedException e){
-                System.out.println("Maquina " + name + " Finalizada");
+//                System.out.println("Maquina " + name + " Finalizada");
                 return;
             }
             catch( Exception e){
@@ -64,8 +64,7 @@ public class MaquinaPintura extends AbstractMaquina implements Runnable{
             Processa(d);
             //System.out.println("Feito...enviando " + this.nome);
             output.submit(d);
-            System.out.println("Enviado " + this.name);
-
+//            System.out.println("Enviado " + this.name);
         }
     }
     

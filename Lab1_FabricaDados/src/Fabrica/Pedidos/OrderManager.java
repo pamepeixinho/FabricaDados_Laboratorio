@@ -2,6 +2,9 @@ package Fabrica.Pedidos;
 
 import Fabrica.Produto.DadosMaker;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 //import java.io.IOException;
 //import java.util.Vector;
 //import java.util.logging.Level;
@@ -17,6 +20,7 @@ public class OrderManager {
     public OrderManager(Leitor l) {
         this.l = l;
         makeDados();
+   
     }
    
     public OrderManager(){}
@@ -31,6 +35,7 @@ public class OrderManager {
            return;
        }
        catch(NullPointerException e){
+           return;
        }
        
        try{
@@ -41,9 +46,10 @@ public class OrderManager {
            
     }
     
-    public void makeDados(){
-
+    private void makeDados(){
         this.pedidos = l.le_pedido();
         DadosMaker producao = new DadosMaker(pedidos);
+        producao.Processando_Dados();
+//        producao.Processando_Dados_NoThread();
     }
 }
