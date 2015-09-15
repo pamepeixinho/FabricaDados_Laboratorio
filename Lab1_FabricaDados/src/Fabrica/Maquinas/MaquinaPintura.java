@@ -62,9 +62,9 @@ public class MaquinaPintura extends AbstractMaquina implements Runnable{
                 
             //System.out.println("Retirei...processando " + this.nome);
             Processa(d);
-            //System.out.println("Feito...enviando " + this.nome);
+//            System.out.println("Feito...enviando " + this.nome);
             output.submit(d);
-//            System.out.println("Enviado " + this.name);
+//            System.out.println("Enviado " + this.name); 
         }
     }
     

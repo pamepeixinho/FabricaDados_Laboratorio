@@ -16,7 +16,7 @@ public class GerenciadorMaquinas {
     
     //Object - ArrayBlockingList
     private final Esteira [] esteira;
-    
+   
     //Pedido
     private Order pedido;
     
@@ -26,7 +26,7 @@ public class GerenciadorMaquinas {
         this.mPintura = new Thread[qM2];
         this.mCorte = new Thread[qM3];
         this.mMontagem = new Thread[qM4];
-        this.esteira = new Esteira[qM1 + qM2 + qM3 + qM4 + 1];
+        this.esteira = new Esteira[5];
     }
     
     public GerenciadorMaquinas(Order pedido, int qM1, int qM2, int qM3, int qM4){
@@ -35,50 +35,52 @@ public class GerenciadorMaquinas {
         this.mPintura = new Thread[qM2];
         this.mCorte = new Thread[qM3];
         this.mMontagem = new Thread[qM4];
-        this.esteira = new Esteira[qM1 + qM2 + qM3 + qM4 + 1];
+        this.esteira = new Esteira[5];
     }
         
     @SuppressWarnings("empty-statement")
     public ArrayList<Dado> execute(){
         int k = 0, numDados = pedido.getNumDados();
         
-        ArrayBlockingQueue<Dado> d= new ArrayBlockingQueue<>(pedido.getNumDados());
+        ArrayBlockingQueue<Dado> d = new ArrayBlockingQueue<>(pedido.getNumDados());
         
         for(int i = 0; i < numDados; i++)
             d.add(new Dado(pedido.getTipo(),pedido.getCor()));
                 
         for(int i = 0; i < esteira.length; i++ )
             esteira[i] = new Esteira(numDados);
-
+        
         for(int i = 0; i < mMolde.length; i++){
-            mMolde[i] = new Thread(new MaquinaMolde(esteira[k],esteira[k+1],("M" + (k+1) + " - Molde")));
-            k++;
+            mMolde[i] = new Thread(new MaquinaMolde(esteira[k],esteira[k+1],("M" + (i+1) + "_Molde")));
             mMolde[i].start();
         }
-        
+//        System.out.println("K = " + k + " e K+1 = " + (k+1));
+        k++;
         for(int i = 0; i < mPintura.length; i++){
-            mPintura[i] = new Thread(new MaquinaPintura(esteira[k],esteira[k+1],("M" + (k+1) + " - Pintura")));    
-            k++;
+            mPintura[i] = new Thread(new MaquinaPintura(esteira[k],esteira[k+1],("M" + (i+1) + "_Pintura")));    
             mPintura[i].start();
         }
         
+//        System.out.println("K = " + k + " e K+1 = " + (k+1));
+        k++;
         for(int i = 0; i < mCorte.length; i++){
-            mCorte[i] = new Thread(new MaquinaCorte(esteira[k],esteira[k+1],("M" + (k+1) + " - Corte")));
-            k++;
+            mCorte[i] = new Thread(new MaquinaCorte(esteira[k],esteira[k+1],("M" + (i+1) + "_Corte")));            
             mCorte[i].start();
         }
-        
+//        System.out.println("K = " + k + " e K+1 = " + (k+1));
+        k++;
+
         for(int i = 0; i < mMontagem.length; i++){
-            mMontagem[i] = new Thread(new MaquinaMontagem(esteira[k],esteira[k+1],("M" + (k+1) + " - Montagem")));    
-            k++;
+            mMontagem[i] = new Thread(new MaquinaMontagem(esteira[k],esteira[k+1],("M" + (i+1) + "_Montagem")));    
             mMontagem[i].start();
         }
 
-        esteira[0].addAll(d);
-        
-        while(esteira[esteira.length - 1].size() < numDados)
+        for(Dado d1 : d)
+            esteira[0].add(d1);
+
+       while(esteira[esteira.length - 1].size() < numDados)
             ;
-        
+
 //        System.out.println("Terminaram os Dados");
                
         for (Thread mMolde1 : mMolde) 
@@ -106,29 +108,28 @@ public class GerenciadorMaquinas {
 
        
         for(int i = 0; i < mMolde.length; i++){
-            mMolde[i] = new Thread(new MaquinaMolde(esteira[k],esteira[k+1],("M" + (k+1) + " - Molde")));
-            k++;
-            mMolde[i].start();
-         
+            mMolde[i] = new Thread(new MaquinaMolde(esteira[k],esteira[k+1],("M" + (k+1) + " - Molde")));            
+            mMolde[i].start(); 
         }
+        
+        k++;
         
         for(int i = 0; i < mPintura.length; i++){
             mPintura[i] = new Thread(new MaquinaPintura(esteira[k],esteira[k+1],("M" + (k+1) + " - Pintura")));    
-            k++;
             mPintura[i].start();
-            
         }
+        
+        k++;
         
         for(int i = 0; i < mCorte.length; i++){
             mCorte[i] = new Thread(new MaquinaCorte(esteira[k],esteira[k+1],("M" + (k+1) + " - Corte")));
-            k++;
             mCorte[i].start();
             
         }
         
+        k++;
         for(int i = 0; i < mMontagem.length; i++){
             mMontagem[i] = new Thread(new MaquinaMontagem(esteira[k],esteira[k+1],("M" + (k+1) + " - Montagem")));    
-            k++;
             mMontagem[i].start();
         }
 
@@ -139,7 +140,7 @@ public class GerenciadorMaquinas {
         while(esteira[esteira.length - 1].size() < n){
         }
         
-        System.out.println("Terminaram os Dados");
+        System.out.println("Terminaram os Dados deste pedidos");
                
         for (Thread mMolde1 : mMolde) {
             mMolde1.interrupt();

@@ -30,19 +30,19 @@ public class DadosMaker {
 
         for(int i = 0; i < pedidos.length; i++){
             System.out.println("Pedido #" + (i+1));
-//            System.out.println("Quantidade de Dados: " + pedidos[i].getNumDados());
-//            System.out.println("Tamanho dos Dados: " + (pedidos[i].getTipo() == 1? "Small" : "Big"));       
-//            System.out.println("Cor dos Dados: " + pedidos[i].getCor());
+            System.out.println("Quantidade de Dados: " + pedidos[i].getNumDados());
+            System.out.println("Tamanho dos Dados: " + (pedidos[i].getTipo() == 1? "Small" : "Big"));       
+            System.out.println("Cor dos Dados: " + pedidos[i].getCor());
                        
-            gMaquinas = new GerenciadorMaquinas(pedidos[i], 1,1,1,1);
+            gMaquinas = new GerenciadorMaquinas(pedidos[i], 5,5,5,5);
             
             saida.addAll(gMaquinas.execute());
             
-//            System.out.println("Pedido #" + i + " terminou com Sucesso");
+//            System.out.println("Pedido #" + (i+1) + " terminou com Sucesso");
 //            System.out.println("");
             System.out.println("----------------------------------------");
 //            System.out.println("");
-//            Runtime.getRuntime().exec("clear");
+
         }
         
         stopTime = System.currentTimeMillis();
@@ -51,7 +51,8 @@ public class DadosMaker {
         System.out.println("Quantidade de Dados produzidos ao final do Processo:" + saida.size());
         System.out.println("Tempo final do Processo " + (stopTime - startTime) + " ms.");
     }
-
+    
+    //SEM THREAD
     public void Processando_Dados_NoThread(){
         saida = new ArrayList<>();
         startTime = System.currentTimeMillis();
