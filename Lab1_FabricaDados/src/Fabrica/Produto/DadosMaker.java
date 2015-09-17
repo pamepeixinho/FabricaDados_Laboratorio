@@ -2,14 +2,15 @@ package Fabrica.Produto;
 
 import Fabrica.Maquinas.*;
 import Fabrica.Pedidos.Order;
-//import java.time.Clock; #LOOK#
+//import java.time.Clock;
 import java.util.*;
 
 public class DadosMaker {
+    
     //Pedidos a serem feitos
     private final Order [] pedidos;
     
-    //Dados fabricados
+    //Dados fabricados 
     private ArrayList<Dado> saida;
     
     //Computando tempo total de fabricacao
@@ -34,7 +35,7 @@ public class DadosMaker {
             System.out.println("Tamanho dos Dados: " + (pedidos[i].getTipo() == 1? "Small" : "Big"));       
             System.out.println("Cor dos Dados: " + pedidos[i].getCor());
                        
-            gMaquinas = new GerenciadorMaquinas(pedidos[i], 5,5,5,5);
+            gMaquinas = new GerenciadorMaquinas(pedidos[i], 15,15,15,15);
             
             saida.addAll(gMaquinas.execute());
             

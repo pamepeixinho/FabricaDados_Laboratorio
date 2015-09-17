@@ -21,6 +21,7 @@ public class GerenciadorMaquinas {
     private Order pedido;
     
     
+    
     public GerenciadorMaquinas(int qM1, int qM2, int qM3, int qM4) {
         this.mMolde = new Thread[qM1];
         this.mPintura = new Thread[qM2];
@@ -75,14 +76,15 @@ public class GerenciadorMaquinas {
             mMontagem[i].start();
         }
 
-        for(Dado d1 : d)
-            esteira[0].add(d1);
+//        for(Dado d1 : d)
+            esteira[0].addAll(d);
 
        while(esteira[esteira.length - 1].size() < numDados)
             ;
 
 //        System.out.println("Terminaram os Dados");
-               
+           
+                    
         for (Thread mMolde1 : mMolde) 
             mMolde1.interrupt();
               
@@ -168,10 +170,4 @@ public class GerenciadorMaquinas {
         this.pedido = pedido;
     }
 
-//    public static void main(String [] args){
-////       GerenciadorMaquinas gm = new GerenciadorMaquinas(1,2,1,1);
-////       gm.teste();
-//    }
-//    
-   
 }

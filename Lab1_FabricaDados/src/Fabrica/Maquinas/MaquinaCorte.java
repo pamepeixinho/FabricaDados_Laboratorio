@@ -46,7 +46,8 @@ public class MaquinaCorte extends AbstractMaquina implements Runnable{
                 System.out.println("Não foi possivel receber Dado da Máquina anterior");
                 return;
             }
-            
+//            if(!this.isLigado())
+//                return;
             //System.out.println("Retirei...processando " + this.nome);
             Processa(d);
             //System.out.println("Feito...enviando " + this.nome);
