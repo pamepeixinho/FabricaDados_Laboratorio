@@ -13,7 +13,7 @@ import java.io.FileNotFoundException;
 public class OrderManager {
    private Leitor l;
    private Order [] pedidos;
-   
+   private String resp;
    
     public OrderManager(Leitor l) {
         this.l = l;
@@ -43,11 +43,23 @@ public class OrderManager {
        }
            
     }
+
+    public String getResp() {
+        return resp;
+    }
+        
+     
+    public OrderManager(Order pedido){
+        this.pedidos = new Order[1];
+        pedidos[0] = pedido;
+        DadosMaker producao = new DadosMaker(this.pedidos);
+        producao.Processando_Dados();
+        resp = producao.returnToServidor();
+    }
     
     private void makeDados(){
         this.pedidos = l.le_pedido();
         DadosMaker producao = new DadosMaker(pedidos);
         producao.Processando_Dados();
-//        producao.Processando_Dados_NoThread();
     }
 }
